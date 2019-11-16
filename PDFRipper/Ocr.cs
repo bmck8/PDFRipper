@@ -29,17 +29,20 @@ namespace NuGet.Tessnet2.src
         {
             var ocr = new tessnet2.Tesseract();
             ocr.Init(_tessdataPath, lang, false);
-            // If the OcrDone delegate is not null then this'll be the multithreaded version
-            ocr.OcrDone = Finished;
-            // For event to work, must use the multithreaded version
+
+            /// If the OcrDone delegate is not null then this'll be the multithreaded version
+            ocr.OcrDone = OcrDone;
+
+            /// For event to work, must use the multithreaded version
             ocr.ProgressEvent += OcrProgressEvent;
             _mEvent = new ManualResetEvent(false);
             ocr.DoOCR(image, Rectangle.Empty);
-            // Wait here it's finished
+
+            /// Wait here it's finished
             _mEvent.WaitOne();
         }
 
-        public void Finished(List<tessnet2.Word> result)
+        public void OcrDone(List<tessnet2.Word> result)
         {
             DumpResult(result);
             _mEvent.Set();

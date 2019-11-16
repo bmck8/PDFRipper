@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFRipper", "PDFRipper\PDFR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFRipper.UnitTests", "PDFRipper.Test\PDFRipper.UnitTests.csproj", "{7CB18B0D-F93B-48D1-B4A1-BC330381985D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFRipper.Console", "PDFRipper.Console\PDFRipper.Console.csproj", "{2A214472-D493-4833-955F-D7D3E983C929}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFRipperWinFormApp", "PDFRipperWinFormApp\PDFRipperWinFormApp.csproj", "{AD7AF5ED-AD8A-4654-B439-B3520AA9DD0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7CB18B0D-F93B-48D1-B4A1-BC330381985D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CB18B0D-F93B-48D1-B4A1-BC330381985D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CB18B0D-F93B-48D1-B4A1-BC330381985D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A214472-D493-4833-955F-D7D3E983C929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A214472-D493-4833-955F-D7D3E983C929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A214472-D493-4833-955F-D7D3E983C929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A214472-D493-4833-955F-D7D3E983C929}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD7AF5ED-AD8A-4654-B439-B3520AA9DD0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD7AF5ED-AD8A-4654-B439-B3520AA9DD0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD7AF5ED-AD8A-4654-B439-B3520AA9DD0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD7AF5ED-AD8A-4654-B439-B3520AA9DD0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
