@@ -60,9 +60,7 @@
     <Content Include="Content\tessdata\eng.unicharset" />
     <Content Include="Content\tessdata\eng.user-words" />
     <Content Include="Content\tessdata\eng.word-dawg" />
-    <Content Include="Resources\Test\1.tif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="Resources\Test\1.tif" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

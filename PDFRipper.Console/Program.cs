@@ -13,7 +13,7 @@ namespace PDFRipper
         {
             try
             {
-                string FilePath = @"D:\Git\PDFRipper\PDFRipper\Resources\Test\1.tif";
+                string FilePath = @"D:\Git\PDFRipper\PDFRipper\Resources\Test\emr.png";
 
                 List<string> res = Ripper.TestEverything(FilePath);
 
