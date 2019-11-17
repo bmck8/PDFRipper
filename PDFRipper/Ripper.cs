@@ -82,7 +82,7 @@ namespace PDFRipper
                 Console.WriteLine(" - Grayscale image processing results - ");
                 for (int i = 0; i < lMax; i++) { Console.WriteLine(Tesseract.GetLineText(OCRRes_Gray, i)); }
                 Console.WriteLine();
-                
+
                 lMax = tessnet2.Tesseract.LineCount(OCRRes_BW);
                 Console.WriteLine(" - Black & white image processing results - ");
                 for (int i = 0; i < lMax; i++) { Console.WriteLine(Tesseract.GetLineText(OCRRes_BW, i)); }
@@ -206,6 +206,30 @@ namespace PDFRipper
             return res;
         }
 
+    }
+
+
+    public class Document
+    {
+        public string FilePath
+        {
+            get { return _FilePath; }
+            set { _FilePath = value; }
+        }
+        private string _FilePath = "";
+
+        public List<Rectangle> PointsOfInterest
+        {
+            get { return _PointsOfInterest; }
+            set { _PointsOfInterest = value; }
+        }
+        private List<Rectangle> _PointsOfInterest = new List<Rectangle>();
+
+
+        public Document(string _FilePath)
+        {
+            this._FilePath = _FilePath;
+        }
     }
 }
 
