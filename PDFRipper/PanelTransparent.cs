@@ -5,18 +5,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using AcroPDFLib;
 using System.Drawing.Drawing2D;
+using System.ComponentModel;
 
 namespace PDFRipper
 {
-    public class DocumentPanel : Panel
+    public class PanelTransparent : Panel
     {
-        private Rectangle rLeft = new Rectangle();
-        private Rectangle rRight = new Rectangle();
-        private Rectangle rTop = new Rectangle();
-        private Rectangle rBottom = new Rectangle();
-
         private const int cGripSize = 20;
         private bool mDragging;
         private Point mDragPos;
@@ -25,70 +20,51 @@ namespace PDFRipper
             return pos.X >= this.ClientSize.Width - cGripSize &&
                    pos.Y >= this.ClientSize.Height - cGripSize;
         }
-
-        public DocumentPanel()
+        private const int WS_EX_TRANSPARENT = 0x20;
+        public PanelTransparent()
         {
-
-            this.DoubleBuffered = true;
+            SetStyle(ControlStyles.Opaque, true);
             this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.SetStyle(ControlStyles.Opaque, true);
-            this.BorderStyle = BorderStyle.FixedSingle;
 
             this.MouseDown += panel_MouseDown;
             this.MouseUp += panel_MouseUp;
             this.MouseMove += panel_MouseMove;
-
         }
 
+        private int opacity = 50;
+        [DefaultValue(50)]
+        public int Opacity
+        {
+            get
+            {
+                return this.opacity;
+            }
+            set
+            {
+                if (value < 0 || value > 100)
+                    throw new ArgumentException("value must be between 0 and 100");
+                this.opacity = value;
+                this.Invalidate();
+            }
+        }
         protected override CreateParams CreateParams
         {
             get
             {
                 CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x20; /// WS_EX_TRANSPARENT
+                cp.ExStyle = cp.ExStyle | WS_EX_TRANSPARENT;
                 return cp;
             }
         }
-
         protected override void OnPaint(PaintEventArgs e)
         {
-
-            //ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor,
-            //    new Rectangle(this.ClientSize.Width - cGripSize, this.ClientSize.Height - cGripSize, cGripSize, cGripSize));
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50 * 255 / 100, this.BackColor)), this.ClientRectangle);
-            base.OnPaint(e);
+            using (var brush = new SolidBrush(Color.FromArgb(this.opacity * 255 / 100, this.BackColor)))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
             this.BringToFront();
-
-
-            /// Mark resize points
-            //Graphics g = e.Graphics;
-
-            //rLeft = new Rectangle(new Point(0, (this.Height / 2) - 2), new Size(5, 5));
-            //g.FillRectangle(new SolidBrush(Color.Red), rLeft);
-
-            //rRight = new Rectangle(new Point((this.Width) - 6, (this.Height / 2) - 2), new Size(5, 5));
-            //g.FillRectangle(new SolidBrush(Color.Red), rRight);
-
-            //rTop = new Rectangle(new Point((this.Width / 2), (0)), new Size(5, 5));
-            //g.FillRectangle(new SolidBrush(Color.Red), rTop);
-
-            //rBottom = new Rectangle(new Point((this.Width / 2), (this.Height) - 6), new Size(5, 5));
-            //g.FillRectangle(new SolidBrush(Color.Red), rBottom);
-
-
-            //Rectangle rPos = new Rectangle(this.Location, this.Size);
-            //if (Parent != null)
-            //{
-            //    List<AxAcroPDFLib.AxAcroPDF> iSects = Parent.Controls.OfType<AxAcroPDFLib.AxAcroPDF>().Where(x => x.Bounds.IntersectsWith(rPos)).ToList();
-            //    if (iSects.Count > 0)
-            //    {
-            //    }
-            //}
-
+            base.OnPaint(e);
         }
-
-    
-
         private Point MouseDownLocation;
         private void panel_MouseDown(object sender, MouseEventArgs e)
         {
@@ -136,7 +112,6 @@ namespace PDFRipper
                 }
             }
         }
-
-
     }
+
 }
