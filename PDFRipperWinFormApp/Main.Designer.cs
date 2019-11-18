@@ -50,6 +50,8 @@
             this.btnAddTemplate = new System.Windows.Forms.Button();
             this.btnNextStep3 = new System.Windows.Forms.Button();
             this.pStep2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lblStep3 = new System.Windows.Forms.Label();
             this.pStep1.SuspendLayout();
@@ -58,6 +60,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbProgressShow)).BeginInit();
             this.pProgressInner.SuspendLayout();
             this.pStep2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -179,7 +183,7 @@
             this.pProgress.Controls.Add(this.panel1);
             this.pProgress.Controls.Add(this.pProgressInner);
             this.pProgress.Controls.Add(this.label2);
-            this.pProgress.Location = new System.Drawing.Point(-1, 403);
+            this.pProgress.Location = new System.Drawing.Point(-1, 410);
             this.pProgress.Name = "pProgress";
             this.pProgress.Size = new System.Drawing.Size(838, 98);
             this.pProgress.TabIndex = 9;
@@ -283,6 +287,7 @@
             this.btnAddTemplate.TabIndex = 9;
             this.btnAddTemplate.Text = "Add";
             this.btnAddTemplate.UseVisualStyleBackColor = false;
+            this.btnAddTemplate.Click += new System.EventHandler(this.btnAddTemplate_Click);
             // 
             // btnNextStep3
             // 
@@ -301,6 +306,7 @@
             // 
             this.pStep2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(182)))), ((int)(((byte)(216)))));
             this.pStep2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pStep2.Controls.Add(this.panel3);
             this.pStep2.Controls.Add(this.btnNextStep3);
             this.pStep2.Controls.Add(this.btnAddTemplate);
             this.pStep2.Controls.Add(this.btnRemoveTemplate);
@@ -311,6 +317,25 @@
             this.pStep2.Name = "pStep2";
             this.pStep2.Size = new System.Drawing.Size(190, 246);
             this.pStep2.TabIndex = 10;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Location = new System.Drawing.Point(4, 215);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(37, 26);
+            this.panel3.TabIndex = 11;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(37, 26);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // panel2
             // 
@@ -339,7 +364,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 429);
+            this.ClientSize = new System.Drawing.Size(834, 436);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pStep2);
             this.Controls.Add(this.pProgress);
@@ -356,6 +381,8 @@
             this.pProgressInner.ResumeLayout(false);
             this.pStep2.ResumeLayout(false);
             this.pStep2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -386,6 +413,8 @@
         private System.Windows.Forms.Panel pStep2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lblStep3;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

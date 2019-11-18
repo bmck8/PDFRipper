@@ -200,5 +200,16 @@ namespace PDFRipperWinFormApp
             if (!this.ClientRectangle.IntersectsWith(r)) { pProgress.Top -= (pProgressInner.Height + 5); }
             else { pProgress.Top += (pProgressInner.Height + 5); }
         }
+
+        private void btnAddTemplate_Click(object sender, EventArgs e)
+        {
+            string SelectedDoc = "";
+            if (lvFiles.SelectedItems.Count > 0) { SelectedDoc = lvFiles.SelectedItems[0].Tag.ToString(); }
+
+            using (Templates t = new Templates(SelectedDoc))
+            {
+                t.ShowDialog(this);
+            }
+        }
     }
 }

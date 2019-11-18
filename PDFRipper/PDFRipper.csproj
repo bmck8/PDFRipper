@@ -52,6 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Template.cs" />
+    <Compile Include="Doc.cs" />
     <Compile Include="Imager.cs" />
     <Compile Include="PanelTransparent.cs">
       <SubType>Component</SubType>

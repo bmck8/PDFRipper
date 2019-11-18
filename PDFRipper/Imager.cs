@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -43,15 +44,17 @@ namespace PDFRipper
         }
 
 
-        public void PDFToImage()
+        public List<Bitmap> PDFToImage()
         {
             if (_FileDirectory != null || _FileDirectory.Length > 0 || _Filepath != null || _Filepath.Length > 0) { Init(); }
 
-            PDFToImage(_Filepath);
+            return PDFToImage(_Filepath);
         }
-        public void PDFToImage(string _Filepath)
+        public List<Bitmap> PDFToImage(string _Filepath)
         {
             if (_Filepath == null || _Filepath.Length == 0 || !File.Exists(_Filepath)) { throw new ArgumentException("File path must be an existing file"); }
+
+            List<Bitmap> lRes = new List<Bitmap>();
 
             if (!Directory.Exists(_nFilepath)) { Directory.CreateDirectory(_nFilepath); }
 
@@ -67,6 +70,7 @@ namespace PDFRipper
                 int TotalFiles = ic.Count;
                 int CurrentProgress = 0;
                 int page = 1;
+
                 foreach (MagickImage image in ic)
                 {
                     CurrentFile = ic.IndexOf(image) + 1;
@@ -77,9 +81,14 @@ namespace PDFRipper
                     ProgressChanged?.Invoke(this, new ImagerProgressChangedEventArgs("Writing files (" + CurrentFile + "/" + TotalFiles + ")"));
                     image.Format = MagickFormat.Jpeg;
                     image.Write(nFilePath);
+
+                    if (File.Exists(nFilePath)) { lRes.Add(new Bitmap(nFilePath)); }
+
                     page++;
                 }
             }
+
+            return lRes;
         }
 
         private void MagickNET_Log(object sender, LogEventArgs e)

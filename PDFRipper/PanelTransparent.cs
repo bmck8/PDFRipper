@@ -12,6 +12,14 @@ namespace PDFRipper
 {
     public class PanelTransparent : Panel
     {
+
+        public bool isSelected
+        {
+            get { return _isSelected; }
+            set { _isSelected = value; Invalidate(); }
+        }
+        private bool _isSelected = false;
+
         private const int cGripSize = 20;
         private bool mDragging;
         private Point mDragPos;
@@ -21,6 +29,8 @@ namespace PDFRipper
                    pos.Y >= this.ClientSize.Height - cGripSize;
         }
         private const int WS_EX_TRANSPARENT = 0x20;
+
+
         public PanelTransparent()
         {
             SetStyle(ControlStyles.Opaque, true);
@@ -29,6 +39,13 @@ namespace PDFRipper
             this.MouseDown += panel_MouseDown;
             this.MouseUp += panel_MouseUp;
             this.MouseMove += panel_MouseMove;
+
+            this.Click += PanelTransparent_Click;
+        }
+
+        private void PanelTransparent_Click(object sender, EventArgs e)
+        {
+            this.isSelected = !isSelected;
         }
 
         private int opacity = 50;
@@ -58,10 +75,19 @@ namespace PDFRipper
         }
         protected override void OnPaint(PaintEventArgs e)
         {
-            using (var brush = new SolidBrush(Color.FromArgb(this.opacity * 255 / 100, this.BackColor)))
+            using (SolidBrush brush = new SolidBrush(Color.FromArgb(this.opacity * 255 / 100, this.BackColor)))
             {
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
+
+            if (isSelected)
+            {
+                using (SolidBrush brush = new SolidBrush(Color.Red))
+                {
+                    e.Graphics.DrawRectangle(new Pen(brush, 5), this.ClientRectangle);
+                }
+            }
+
             this.BringToFront();
             base.OnPaint(e);
         }
