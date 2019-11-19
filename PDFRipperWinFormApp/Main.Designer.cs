@@ -370,6 +370,7 @@
             this.Controls.Add(this.pProgress);
             this.Controls.Add(this.pStep1);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Imager";
             this.Load += new System.EventHandler(this.Main_Load);
             this.pStep1.ResumeLayout(false);

@@ -59,37 +59,81 @@ namespace PDFRipperWinFormApp
             {
                 Console.WriteLine("Failed '" + MethodBase.GetCurrentMethod().Name + "': " + ex.ToString());
             }
+
+
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    Color c = Color.DodgerBlue;
+        //    ColorDialog cd1 = new ColorDialog();
+
+        //    cd1.Color = Color.DodgerBlue;
+        //    cd1.AllowFullOpen = true;
+        //    cd1.FullOpen = true;
+        //    cd1.AnyColor = true;
+
+        //    List<int> cList = Emerson.Cookstown.Colour.Palette.Original.AllColours.Select(x => ColorTranslator.ToOle(x)).ToList();
+        //    cd1.CustomColors = cList.ToArray();
+
+        //    if (cd1.ShowDialog(this) == DialogResult.OK) { c = cd1.Color; }
+
+        //    PanelTransparent pt = new PanelTransparent();
+        //    pt.Opacity = 30;
+        //    pt.BackColor = c;
+        //    pt.Name = "pTrans_" + DateTime.Now.ToString("hhmmss");
+
+        //    this.Controls.Add(pt);
+        //    pt.BringToFront();
+        //}
+
+        //private void btnRemove_Click(object sender, EventArgs e)
+        //{
+        //    List<PanelTransparent> c = this.Controls.OfType<PanelTransparent>().Where(x => x.isSelected).ToList();
+
+        //    if (c.Count > 0) { c.ForEach(x => x.Dispose()); this.Invalidate(true); }
+        //}
+
+
+
+        private void pbImage_Selected(object sender, EventArgs e)
         {
-            Color c = Color.DodgerBlue;
-            ColorDialog cd1 = new ColorDialog();
+            /// Add region to list view
+            RectangleF rRegion = pbImage.SelectionRegion;
 
-            cd1.Color = Color.DodgerBlue;
-            cd1.AllowFullOpen = true;
-            cd1.FullOpen = true;
-            cd1.AnyColor = true;
 
-            List<int> cList = Emerson.Cookstown.Colour.Palette.Original.AllColours.Select(x => ColorTranslator.ToOle(x)).ToList();
-            cd1.CustomColors = cList.ToArray();
+            if (rRegion.Width > 5 && rRegion.Height > 5)
+            {
+                int rNumber = lvPOI.Items.Count;
 
-            if (cd1.ShowDialog(this) == DialogResult.OK) { c = cd1.Color; }
+                ListViewItem lvi = new ListViewItem();
+                lvi.Name = "region_" + rNumber;
+                lvi.Text = "Region " + rNumber + " {X:" + (int)rRegion.X + "; Y:" + (int)rRegion.Y + "; W:" + (int)rRegion.Width + "; H:" + (int)rRegion.Height + ";}";
+                lvi.Tag = rRegion;
 
-            PanelTransparent pt = new PanelTransparent();
-            pt.Opacity = 30;
-            pt.BackColor = c;
-            pt.Name = "pTrans_" + DateTime.Now.ToString("hhmmss");
-
-            this.Controls.Add(pt);
-            pt.BringToFront();
+                lvPOI.Items.Add(lvi);
+            }
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void lvPOI_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<PanelTransparent> c = this.Controls.OfType<PanelTransparent>().Where(x => x.isSelected).ToList();
+            if (lvPOI.SelectedItems.Count > 0)
+            {
+                ListViewItem lviSelected = lvPOI.SelectedItems[0];
+                RectangleF rRegion = (RectangleF)lviSelected.Tag;
+                pbImage.SelectionRegion = rRegion;
+            }
+        }
 
-            if (c.Count > 0) { c.ForEach(x => x.Dispose()); this.Invalidate(true); }
+        private void btnRemoveFile_Click(object sender, EventArgs e)
+        {
+            if (lvPOI.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem lvi in lvPOI.SelectedItems)
+                {
+                    lvPOI.Items.Remove(lvi);
+                }
+            }
         }
     }
 }

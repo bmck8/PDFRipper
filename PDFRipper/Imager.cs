@@ -59,7 +59,7 @@ namespace PDFRipper
             if (!Directory.Exists(_nFilepath)) { Directory.CreateDirectory(_nFilepath); }
 
             MagickReadSettings settings = new MagickReadSettings();
-            settings.Density = new Density(120, 120);
+            settings.Density = new Density(200, 200);
 
             using (MagickImageCollection ic = new MagickImageCollection())
             {

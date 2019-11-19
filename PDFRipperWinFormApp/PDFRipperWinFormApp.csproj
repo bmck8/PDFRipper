@@ -54,6 +54,10 @@
     <Reference Include="Emerson.Cookstown">
       <HintPath>..\..\..\Visual Studio\Emerson.Cookstown\Emerson.Cookstown\bin\Debug\Emerson.Cookstown.dll</HintPath>
     </Reference>
+    <Reference Include="Emerson.Cookstown.Controls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Visual Studio\Emerson.Cookstown.Controls\Emerson.Cookstown.Controls\bin\Debug\Emerson.Cookstown.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
